@@ -5,7 +5,7 @@ from companies.models import Enterprise
 
 
 class User(AbstractBaseUser):
-    nome = models.CharField(max_length=150)
+    name = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
     is_owner = models.BooleanField(default=True)
 
@@ -16,7 +16,7 @@ class User(AbstractBaseUser):
 
 
 class Group(models.Model):    
-    nome = models.CharField(max_length=150)
+    name = models.CharField(max_length=150)
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
 
 class Group_Permissions(models.Model):

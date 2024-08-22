@@ -10,7 +10,7 @@ class Authentication:
         user_exists = User.objects.filter(email=email).exists()
 
         if not user_exists:
-            raise AuthenticationFailed('Email não encontrado.)')
+            raise AuthenticationFailed('Email não encontrado.')
 
         user = User.objects.filter(email=email).first()
 
@@ -19,7 +19,7 @@ class Authentication:
 
         return user
 
-    def singnup(self, name, email, password, type_account='owner', company_id=False):
+    def signup(self, name, email, password, type_account='owner', company_id=False):
         if not name or name =='':
             raise APIException('O nome não deve ser null')
 
@@ -36,6 +36,8 @@ class Authentication:
             raise APIException('O id da empresa não deve ser null')
 
         password_hashed = make_password(password)
+
+        print(f'{name}\n')
 
         created_user = User.objects.create(
             name=name,
