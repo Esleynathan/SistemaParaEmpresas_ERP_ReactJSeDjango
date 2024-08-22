@@ -37,8 +37,6 @@ class Authentication:
 
         password_hashed = make_password(password)
 
-        print(f'{name}\n')
-
         created_user = User.objects.create(
             name=name,
             email=email,
