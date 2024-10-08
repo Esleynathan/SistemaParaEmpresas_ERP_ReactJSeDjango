@@ -45,13 +45,15 @@ class Authentication:
         )
 
         if type_account == 'owner':
-            Enterprise.objects.create(
+            created_enterprise = Enterprise.objects.create(
                 name='Nome da Empresa',
                 user_id=created_user.id
             )
 
         if type_account == 'employee':
             Employee.objects.create(
-                enterprise_id='Nome da Empresa',
+                enterprise_id=company_id or created_enterprise.id,
                 user_id=created_user.id
-        )
+            )     
+
+        return created_user 

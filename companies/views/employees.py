@@ -17,11 +17,11 @@ class Employees(Base):
         enterprise_id = self.get_enterprise_id(request.user.id)
 
         # Buscando proprietario da empresa
-        owner_id = Enterprise.objects.values('user_id').filteR(id=enterprise_id).first()['user_id']
+        owner_id = Enterprise.objects.values('user_id').filter(id=enterprise_id).first()['user_id']
 
-        employees = Employee.objects.values(enterprise_id=enterprise_id).exclude(user_id=owner_id).all()
+        employees = Employee.objects.filter(enterprise_id=enterprise_id).exclude(user_id=owner_id).all()
 
-        serializer = EmployeeSerializer(employees, Many=True)
+        serializer = EmployeeSerializer(employees, many=True)
 
         return Response({"employees": serializer.data})
 

@@ -7,9 +7,8 @@ from accounts.models import Group
 
 class Base(APIView):
     def get_enterprise_id(self, user_id):
-        employee = Employee.objects.filter(user_id=user_id)
-        owner = Enterprise.objects.filter(user_id=user_id)
-
+        employee = Employee.objects.filter(user_id=user_id).first()
+        owner = Enterprise.objects.filter(user_id=user_id).first()
         if employee:
             return employee.enterprise.id
         return owner.id
@@ -18,7 +17,7 @@ class Base(APIView):
         enterprise_id = self.get_enterprise_id(user_id)
 
         employee = Employee.objects.filter(id=employee_id, enterprise_id=enterprise_id).first()
-
+        
         if not employee:
             raise NotFoundEmployee
         return employee
