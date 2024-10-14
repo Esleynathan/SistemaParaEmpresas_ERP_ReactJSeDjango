@@ -1,6 +1,7 @@
 from django.urls import path
 from companies.views.employees import Employees, EmployeesDetail
 from companies.views.permissions import PermissionDetail
+from companies.views.groups import Groups, GroupsDetail
 
 urlpatterns = [
     # Employees Endpoints
@@ -8,5 +9,7 @@ urlpatterns = [
     path('employees/<int:employee_id>', EmployeesDetail.as_view()),
 
     # Groups and Permissions  Endpoints
+    path('groups', Groups.as_view()),
+    path('groups/<int:group_id>', GroupsDetail.as_view()),
     path('permissions', PermissionDetail.as_view()),
 ]
