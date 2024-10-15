@@ -91,18 +91,18 @@ class TasksSerializer (serializers.ModelSerializer):
     status = serializers.SerializerMethodField()
     
     class Meta:
-        model = Group
+        model = Task
         fields = (
             'id',
             'title',
             'description',
-            'due_data',
+            'due_date',
             'created_at',
             'status',
         )
 
     def get_status(self, obj):
-        return obj.status.nome
+        return obj.status.name
 
 class TaskSerializer (serializers.ModelSerializer):
     status = serializers.SerializerMethodField()
@@ -110,29 +110,29 @@ class TaskSerializer (serializers.ModelSerializer):
 
     
     class Meta:
-        model = Group
+        model = Task
         fields = (
             'id',
             'title',
             'description',
-            'due_data',
+            'due_date',
             'created_at',
             'status',
             'employee'
         )
 
     def get_status(self, obj):
-        return obj.status.nome
+        return obj.status.name
         
     def get_employee(self, obj):
         return EmployeeSerializer(obj.employee).data
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.title)        
-        instance.due_date = validated_data.get('due_date', instance.title)
-        instance.status_id = validated_data.get('status_id', instance.title)
-        instance.employee_id = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.status_id = validated_data.get('status_id', instance.status_id)
+        instance.employee_id = validated_data.get('employee_id', instance.employee_id)                
+        instance.due_date = validated_data.get('due_date', instance.due_date)
 
         instance.save()
 
